@@ -1,13 +1,16 @@
 import Header from './components/Header';
 import './App.css';
 import CardList from './components/CardList';
-import CardData from './sample/card-data.json';
 import SendImageButton from './components/SendImageButton';
 import { UIProvider } from "@yamada-ui/react"
 import { Pagination } from './components/Pagination/indext';
-
+import { useState } from 'react';
+import useLGTMFetch from './hooks/useLGTMFetch';
 
 function App() {
+
+  const [activePage, setActivePage] = useState(1);
+  const { LGTMUrls, loading, error } = useLGTMFetch(activePage);
 
   const fetchMaxPageNum = () => {
     // TODO: fetch data from the server
@@ -28,8 +31,8 @@ function App() {
       <div className="App">
         <Header />
         <SendImageButton />
-        <CardList {...CardData} />
-        <Pagination fetchLGTMsBy={fetchLGTMsBy} />
+        <CardList {...LGTMUrls} />
+        <Pagination activePage={activePage} setActivePage={setActivePage} />
       </div>
     </UIProvider>
   );
