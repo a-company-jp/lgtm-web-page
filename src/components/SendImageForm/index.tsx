@@ -1,48 +1,34 @@
-// SendImageForm.tsx
+'use client';
 
-import React, { useRef, useState } from 'react';
 import { InputImage } from '../InputImage';
 
-const IMAGE_ID = 'image';
+import { useSendImageForm, IMAGE_ID } from '../../hooks/useSendImageForm';
 
 export const SendImageForm: React.FC = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [fileName, setFileName] = useState('');
-  const [imageSource, setImageSource] = useState('');
+  const {
+    fileInputRef,
+    rest,
+    ref,
+    onSubmit,
+    handleSubmit,
+    selectFile,
+  } = useSendImageForm();
 
-  const selectFile = () => {
-    if (!fileInputRef.current) return;
-    fileInputRef.current.click();
-  };
-
-  const generateImageSource = (files: FileList) => {
-    const file = files[0];
-    const fileReader = new FileReader();
-    setFileName(file.name);
-    fileReader.onload = () => {
-      setImageSource(fileReader.result as string);
-    };
-    fileReader.readAsDataURL(file);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length <= 0) return;
-
-    generateImageSource(files);
-    setImageFile(files[0]);
-  };
-
+  // handleSubmitに送信時の処理を渡す。
   return (
-    <form>
-      <div>
-        <button type="button" onClick={selectFile}>Upload Image</button>
+    <form  onSubmit={handleSubmit(onSubmit)}>
+      <div  onClick={selectFile} role="presentation">
+        '画像を選択する'
+
         <InputImage
           fileInputRef={fileInputRef}
-          onChange={handleFileChange}
+          refCallback={ref}
           id={IMAGE_ID}
+          {...rest}
         />
+      </div>
+      <div >
+        <button type="submit">画像を送信</button>
       </div>
     </form>
   );
