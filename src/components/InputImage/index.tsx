@@ -4,6 +4,7 @@ import { RefCallBack } from 'react-hook-form';
 export type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   id: InputHTMLAttributes<HTMLInputElement>['id'];
+  refCallback: RefCallBack;
   fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -14,11 +15,15 @@ export const InputImage: React.FC<Props> = ({
   onChange,
   id,
   fileInputRef,
+  refCallback,
   ...rest
 }) => {
   return (
     <input
-      ref={fileInputRef} // refを受け取れるようにする。
+      ref={(e) => {
+        refCallback(e);
+        fileInputRef.current = e;
+      }}
       id={id}
       type="file"
       accept="image/*"
