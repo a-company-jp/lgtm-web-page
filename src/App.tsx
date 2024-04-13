@@ -3,6 +3,7 @@ import './App.css';
 import CardList from './components/CardList';
 import CardData from './sample/card-data.json';
 import SendImageButton from './components/SendImageButton';
+import { UIProvider } from "@yamada-ui/react"
 
 
 function App() {
@@ -11,12 +12,14 @@ function App() {
   }
 
   return (
+    <UIProvider>
     <div className="App">
       <Header />
       <SendImageButton />
       <CardList {...CardData} />
       
     </div>
+    </UIProvider>
   );
 }
 
