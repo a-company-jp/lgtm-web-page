@@ -6,7 +6,7 @@ type PrevButtonProps = {
 
 const PrevButton = ({ clickHandler }: PrevButtonProps) => {
     const styles = {
-        prevButton: 'inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180',
+        prevButton: 'inline-flex size-12 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 hover:bg-gray-200',
     }
     return (
         <a
