@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const useApiClient = () => {
-  const domain = process.env.VITE_BACKEND_DOMAIN;
+  const domain = process.env.BACKEND_DOMAIN;
 
   interface BackendResponse {
     // eslint-disable-next-line
