@@ -11,7 +11,7 @@ export type Props = {
   HTMLInputElement
 >;
 
-export const InputImage: React.FC<Props> = ({
+const InputImage: React.FC<Props> = ({
   onChange,
   id,
   fileInputRef,
@@ -33,3 +33,5 @@ export const InputImage: React.FC<Props> = ({
     />
   );
 };
+
+export default InputImage;
