@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 export const IMAGE_ID = 'image';
@@ -8,17 +8,21 @@ type FormValues = {
 };
 
 export const useSendImageForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm<FormValues>();
-
+  const { register, handleSubmit, reset } = useForm<FormValues>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const isImageSelected = useRef<boolean>(false);
 
   const selectFile = () => {
-    if (!fileInputRef.current) return;
-    fileInputRef.current.click();
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length <= 0) return;
+    generateImageData(files);
+    sendImage({ image: files });
   };
 
   const generateImageData = (files: FileList) => {
@@ -31,41 +35,30 @@ export const useSendImageForm = () => {
       console.log('ファイル名:', fileName);
     };
     fileReader.readAsDataURL(file);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length <= 0) return;
-
-    generateImageData(files);
+    isImageSelected.current = true;
+    console.log('fileInputRef.current:', fileInputRef.current);
   };
 
   const { ref, ...rest } = register(IMAGE_ID, {
-    onChange: handleFileChange, 
+    onChange: handleFileChange,
     required: 'ファイルを選択してください',
   });
 
-  // フォーム送信時の処理
-  const onSubmit = async (data: FormValues) => {
-    // フォームデータを作成
-    const formData = new FormData();
-    formData.append('image', data.image[0]); // ここで選択されたファイルを追加
+  const sendImage = async (data: FormValues) => {
+    if (!isImageSelected.current) return;
 
+    const formData = new FormData();
+    formData.append('image', data.image[0]);
     try {
-      // ファイルをサーバーに送信するリクエストを行う
       const response = await fetch('https://example.com/upload', {
         method: 'POST',
         body: formData,
       });
-
-      // レスポンスの処理
       const responseData = await response.json();
       console.log('サーバーからのレスポンス:', responseData);
     } catch (error) {
       console.error('エラー:', error);
     }
-
-    // フォーム送信後に画像関連のステートをリセット
     reset();
   };
 
@@ -73,7 +66,7 @@ export const useSendImageForm = () => {
     fileInputRef,
     rest,
     ref,
-    onSubmit,
+    onSubmit: sendImage,
     handleSubmit,
     selectFile,
   };
