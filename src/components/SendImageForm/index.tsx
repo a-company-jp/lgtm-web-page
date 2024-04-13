@@ -34,33 +34,15 @@ export const SendImageForm: React.FC = () => {
     setImageFile(files[0]);
   };
 
-  const handleClickCancelButton = () => {
-    setFileName('');
-    setImageSource('');
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  };
-
   return (
     <form>
-      <div onClick={selectFile} role="presentation">
-        {fileName ? (
-          <img src={imageSource} alt="Uploaded Image" />
-        ) : (
-          '+ Upload Image'
-        )}
-
+      <div>
+        <button type="button" onClick={selectFile}>Upload Image</button>
         <InputImage
           fileInputRef={fileInputRef}
           onChange={handleFileChange}
           id={IMAGE_ID}
         />
-      </div>
-
-      <div>
-        <button onClick={handleClickCancelButton}>× Cancel</button>
-        <button type="submit">Send Image</button>
       </div>
     </form>
   );
