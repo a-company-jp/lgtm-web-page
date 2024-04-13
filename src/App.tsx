@@ -2,8 +2,8 @@ import Header from './components/Header';
 import './App.css';
 import CardList from './components/CardList';
 import CardData from './sample/card-data.json';
-import Pages from './sample/pages.json';
 import SendImageButton from './components/SendImageButton';
+import { UIProvider } from "@yamada-ui/react"
 import { Pagination } from './components/Pagination/indext';
 
 
@@ -24,12 +24,14 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header />
-      <SendImageButton />
-      <CardList {...CardData} />
-      <Pagination fetchLGTMsBy={fetchLGTMsBy} />
-    </div>
+    <UIProvider>
+      <div className="App">
+        <Header />
+        <SendImageButton />
+        <CardList {...CardData} />
+        <Pagination fetchLGTMsBy={fetchLGTMsBy} />
+      </div>
+    </UIProvider>
   );
 }
 
