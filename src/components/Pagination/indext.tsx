@@ -1,19 +1,18 @@
 import PrevButton from "../atoms/PrevButton"
 import NextButton from "../atoms/NextButton"
-import usePagination from "../../hooks/usePagination"
-import { useEffect } from "react";
-import { set } from "react-hook-form";
+import useDisplayPageNums from "../../hooks/useDisplayPage";
 
 type PaginationProps = {
-    fetchLGTMsBy: (page: number) => void;
+    activePage: number;
+    setActivePage: (page: number) => void;
 }
 
-export const Pagination = ({ fetchLGTMsBy }: PaginationProps) => {
+export const Pagination = ({ activePage, setActivePage }: PaginationProps) => {
 
     // TODO: set the maximum number of pages from the server
-    const MAX_PAGE = 30;
+    const MAX_PAGE = parseInt(process.env.REACT_APP_MAX_PAGE || '20');
 
-    const { activePage, pageNums, setActivePage } = usePagination(MAX_PAGE);
+    const { pageNums } = useDisplayPageNums({ activePage, setActivePage });
 
     const styles = {
         container: 'flex justify-center gap-1 text-xl font-medium h-14 mt-4',
@@ -23,8 +22,15 @@ export const Pagination = ({ fetchLGTMsBy }: PaginationProps) => {
     }
 
     const clickHandler = (page: number) => {
-        fetchLGTMsBy(page);
-        setActivePage(page);
+        if (page < 1) {
+            setActivePage(1);
+            return;
+        } else if (page > MAX_PAGE) {
+            setActivePage(MAX_PAGE);
+            return;
+        } else {
+            setActivePage(page);
+        }
     }
 
     return (

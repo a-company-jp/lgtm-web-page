@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 
-const usePagination = (maxPage: number) => {
+type UsePaginationProps = {
+    activePage: number;
+    setActivePage: (num: number) => void;
+}
 
+const useDisplayPageNums = ({ activePage, setActivePage }: UsePaginationProps) => {
+
+    // TODO: make it dynamic
+    const NUM_MAX_PAGE = parseInt(process.env.REACT_APP_MAX_PAGE || '20');
     const NUM_DISPLAY_PAGE = 5;
 
-    const [activePage, setActivePage] = useState(1);
     const [pageNums, setPageNums] = useState<number[]>([1, 2, 3, 4, 5]);
 
 
@@ -12,9 +18,9 @@ const usePagination = (maxPage: number) => {
         if (activePage < 1) {
             setActivePage(1);
             setPageNums(generatePageNums(1));
-        } else if (activePage > maxPage) {
-            setActivePage(maxPage);
-            setPageNums(generatePageNums(maxPage));
+        } else if (activePage > NUM_MAX_PAGE) {
+            setActivePage(NUM_MAX_PAGE);
+            setPageNums(generatePageNums(NUM_MAX_PAGE));
         } else {
             setPageNums(generatePageNums(activePage));
         }
@@ -24,9 +30,9 @@ const usePagination = (maxPage: number) => {
         // small page number case
         if (numActivePage < 3) {
             return [1, 2, 3, 4, 5];
-        } else if (numActivePage > maxPage - 3) { // large page number case
+        } else if (numActivePage > NUM_MAX_PAGE - 3) { // large page number case
             return Array.from({ length: NUM_DISPLAY_PAGE }, (_, index) => {
-                return maxPage - 4 + index;
+                return NUM_MAX_PAGE - 4 + index;
             });
         }
 
@@ -38,7 +44,7 @@ const usePagination = (maxPage: number) => {
 
 
 
-    return { activePage, pageNums, setActivePage };
+    return { pageNums };
 }
 
-export default usePagination;
+export default useDisplayPageNums;
