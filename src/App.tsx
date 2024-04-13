@@ -13,12 +13,11 @@ function App() {
 
   return (
     <UIProvider>
-    <div className="App">
-      <Header />
-      <SendImageButton />
-      <CardList {...CardData} />
-      
-    </div>
+      <div className="App">
+        <Header />
+        <SendImageButton />
+        <CardList {...CardData} />
+      </div>
     </UIProvider>
   );
 }
