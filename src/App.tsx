@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import Header from './components/Header';
 import './App.css';
+import CardList from './components/CardList';
+import CardData from './sample/card-data.json';
+import SendImageButton from './components/SendImageButton';
+
 
 function App() {
+  const styles = {
+    buttonContainer: "flex justify-end mt-4 mr-36",
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <SendImageButton />
+      <CardList {...CardData} />
+      
     </div>
   );
 }
