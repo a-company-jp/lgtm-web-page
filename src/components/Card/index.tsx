@@ -4,11 +4,11 @@ import { FaRegCopy } from "react-icons/fa";
 import useClipboard from '../../hooks/useClipboard';
 
 export type CardProps = {
-    imageUri: string
+    imageUrl: string
     title?: string
 }
 
-const Card = ({ imageUri, title }: CardProps) => {
+const Card = ({ imageUrl, title }: CardProps) => {
 
     const { setCopyText } = useClipboard();
 
@@ -25,8 +25,8 @@ const Card = ({ imageUri, title }: CardProps) => {
 
     return (
         <div className={`${styles.centering} ${styles.card}`}>
-            <button onClick={() => setCopyText(imageUri)} className={`${styles.linkWrapper}`}>
-                <img alt="LGTMの画像" src={imageUri} className={`${styles.image}`} />
+            <button onClick={() => setCopyText(imageUrl)} className={`${styles.linkWrapper}`}>
+                <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
 
                 <div className={`${styles.hoverBox} ${styles.centering}`}>
                     <div className={`${styles.copyBox}`}>
