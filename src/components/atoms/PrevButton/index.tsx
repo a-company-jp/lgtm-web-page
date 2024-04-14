@@ -1,5 +1,3 @@
-import { click } from "@testing-library/user-event/dist/click";
-
 type PrevButtonProps = {
     clickHandler: () => void;
 }
@@ -9,7 +7,7 @@ const PrevButton = ({ clickHandler }: PrevButtonProps) => {
         prevButton: 'inline-flex size-12 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180 hover:bg-gray-200',
     }
     return (
-        <a
+        <button
             onClick={clickHandler}
             className={styles.prevButton}
         >
@@ -26,7 +24,7 @@ const PrevButton = ({ clickHandler }: PrevButtonProps) => {
                     clip-rule="evenodd"
                 />
             </svg>
-        </a>
+        </button>
     )
 }
 

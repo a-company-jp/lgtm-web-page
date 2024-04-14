@@ -9,7 +9,7 @@ const NextButton = ({ clickHandler }: NextButtonProps) => {
 
     return (
         <li>
-            <a
+            <button
                 onClick={clickHandler}
                 className={styles.nextButton}
             >
@@ -26,7 +26,7 @@ const NextButton = ({ clickHandler }: NextButtonProps) => {
                         clip-rule="evenodd"
                     />
                 </svg>
-            </a>
+            </button>
         </li>
     )
 }

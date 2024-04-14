@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { list } from '../fetch/LGTM';
 
-const useLGTMFetch = (activePage: number) => {
+const useLGTMFetch = (activePage: number, uploaded: boolean, setUploaded: (uploaded: boolean) => void) => {
   const [LGTMUrls, setLGTMUrls] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -17,10 +17,14 @@ const useLGTMFetch = (activePage: number) => {
         setError(error);
       }
       setLoading(false);
+
+      if (uploaded) {
+        setUploaded(false);
+      }
     };
 
     fetchData();
-  }, [activePage]);
+  }, [activePage, uploaded, setUploaded]);
 
   return { LGTMUrls, loading, error };
 }
