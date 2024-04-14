@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaRegCopy } from "react-icons/fa";
+import { imageCopy } from '../../utils';
 
-import useClipboard from '../../hooks/useClipboard';
 
 export type CardProps = {
     imageUrl: string
@@ -9,8 +9,6 @@ export type CardProps = {
 }
 
 const Card = ({ imageUrl, title }: CardProps) => {
-
-    const { setCopyText } = useClipboard();
 
     // TODO: refactor css
     const styles = {
@@ -25,9 +23,8 @@ const Card = ({ imageUrl, title }: CardProps) => {
 
     return (
         <div className={`${styles.centering} ${styles.card}`}>
-            <button onClick={() => setCopyText(imageUrl)} className={`${styles.linkWrapper}`}>
+            <button onClick={() => imageCopy(imageUrl)} className={`${styles.linkWrapper}`}>
                 <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
-
                 <div className={`${styles.hoverBox} ${styles.centering}`}>
                     <div className={`${styles.copyBox}`}>
                         <FaRegCopy className='' color='white' size={50} />
