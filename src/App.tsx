@@ -11,7 +11,7 @@ function App() {
 
   const [activePage, setActivePage] = useState(1);
   const [uploaded, setUploaded] = useState(false);
-  const { LGTMUrls, loading, error } = useLGTMFetch(activePage, uploaded, setUploaded);
+  const {LGTMUrls} = useLGTMFetch(activePage, uploaded, setUploaded);
 
   return (
     <UIProvider>
