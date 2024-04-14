@@ -3,7 +3,7 @@ import './App.css';
 import CardList from './components/CardList';
 import SendImageButton from './components/SendImageButton';
 import { UIProvider } from "@yamada-ui/react"
-import { Pagination } from './components/Pagination/indext';
+import { Pagination } from './components/Pagination';
 import { useState } from 'react';
 import useLGTMFetch from './hooks/useLGTMFetch';
 
