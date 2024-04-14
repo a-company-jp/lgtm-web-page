@@ -42,21 +42,21 @@ export const Pagination = ({ activePage, setActivePage }: PaginationProps) => {
                 return (
                     activePage === pageNum ? (
                         <li className={styles.itemBox}>
-                            <a
+                            <button
                                 onClick={() => clickHandler(pageNum)}
                                 className={styles.active}
                             >
                                 {pageNum}
-                            </a>
+                            </button>
                         </li>
                     ) : (
                         <li className={styles.itemBox}>
-                            <a
+                            <button
                                 onClick={() => clickHandler(pageNum)}
                                 className={styles.item}
                             >
                                 {pageNum}
-                            </a>
+                            </button>
                         </li>
                     )
                 )
