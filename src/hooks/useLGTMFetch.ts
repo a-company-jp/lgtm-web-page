@@ -24,7 +24,7 @@ const useLGTMFetch = (activePage: number, uploaded: boolean, setUploaded: (uploa
     };
 
     fetchData();
-  }, [activePage, uploaded]);
+  }, [activePage, uploaded, setUploaded]);
 
   return { LGTMUrls, loading, error };
 }

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { post } from '../fetch/LGTM'
 
 export const IMAGE_ID = 'image';

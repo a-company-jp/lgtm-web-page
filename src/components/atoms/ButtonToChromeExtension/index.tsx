@@ -1,5 +1,3 @@
-import { config } from "process";
-
 const ButtonToChromeExtension = (): JSX.Element => {
 
   // TODO: set environment variable
