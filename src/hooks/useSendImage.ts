@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
+import { post } from '../fetch/LGTM'
 
 export const IMAGE_ID = 'image';
 
@@ -7,7 +8,7 @@ type FormValues = {
   image: FileList;
 };
 
-export const useSendImageForm = () => {
+export const useSendImage = (setUploaded: (uploaded: boolean) => void) => {
   const { register, handleSubmit, reset } = useForm<FormValues>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const isImageSelected = useRef<boolean>(false);
@@ -46,16 +47,12 @@ export const useSendImageForm = () => {
 
   const sendImage = async (data: FormValues) => {
     if (!isImageSelected.current) return;
-
-    const formData = new FormData();
-    formData.append('image', data.image[0]);
     try {
-      const response = await fetch('https://example.com/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const responseData = await response.json();
-      console.log('サーバーからのレスポンス:', responseData);
+      const response = await post(new Blob([data.image[0]]));
+      setUploaded(true);
+      const imageUrl = response.imageUrl;
+
+      console.log('サーバーからのレスポンス:', imageUrl);
     } catch (error) {
       console.error('エラー:', error);
     }
