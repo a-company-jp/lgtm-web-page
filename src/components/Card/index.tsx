@@ -1,43 +1,56 @@
-import React from 'react'
-import { FaRegCopy } from "react-icons/fa";
-import { imageCopy } from '../../utils';
-
+import React, { useState } from "react";
+import { FaRegCheckCircle, FaRegCopy } from "react-icons/fa";
+import { imageCopy } from "../../utils";
 
 export type CardProps = {
-    imageUrl: string
-    title?: string
-}
+  imageUrl: string;
+};
 
-const Card = ({ imageUrl, title }: CardProps) => {
+const Card = ({ imageUrl }: CardProps) => {
+  const [isCopying, setIsCopying] = useState(false);
 
-    // TODO: refactor css
-    const styles = {
-        centering: 'flex justify-center items-center',
-        card: 'w-full h-full rounded-xl',
-        linkWrapper: 'group relative block bg-black w-full h-full justify-between rounded-xl',
-        image: 'absolute inset-0 h-full w-full  opacity-75 transition-opacity group-hover:opacity-50 rounded-xl',
-        title: 'text-xl font-bold text-white sm:text-2xl top-4',
-        hoverBox: 'mt-20',
-        copyBox: 'translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 mt-4',
-    }
+  const handleCopyClick = async () => {
+    await imageCopy(imageUrl);
+    setIsCopying(true);
+    setTimeout(() => {
+      setIsCopying(false);
+    }, 2000);
+  };
 
-    return (
-        <div className={`${styles.centering} ${styles.card}`}>
-            <button onClick={() => imageCopy(imageUrl)} className={`${styles.linkWrapper}`}>
-                <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
-                <div className={`${styles.hoverBox} ${styles.centering}`}>
-                    <div className={`${styles.copyBox}`}>
-                        <FaRegCopy className='' color='white' size={50} />
-                    </div>
-                </div>
+  // TODO: refactor css
+  const styles = {
+    centering: "",
+    card: "relative",
+    linkWrapper: "group relative",
+    image:
+      "inset-0 h-full w-full transition-opacity group-hover:opacity-30 rounded-xl",
+    checkCircleWrapper:
+      "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center",
+    checkCircle: "mr-2 text-green-500",
+    copyMessage: "text-green-500 font-bold",
+    copyIcon:
+      "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-75 transition-opacity",
+  };
 
-                <div className="relative p-4 sm:p-6 lg:p-8 pt-8 whitespace-no-wrap">
-                    <p className={`${styles.title}`}>{title}</p>
-                </div>
-            </button>
-        </div>
+  return (
+    <div className={`${styles.centering} ${styles.card}`}>
+      <button onClick={handleCopyClick} className={`${styles.linkWrapper}`}>
+        <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
+        {isCopying ? (
+          <div className={styles.checkCircleWrapper}>
+            <FaRegCheckCircle
+              className={styles.checkCircle}
+              color=""
+              size={35}
+            />
+            <span className={styles.copyMessage}>Copied!!</span>
+          </div>
+        ) : (
+          <FaRegCopy className={styles.copyIcon} color="" size={35} />
+        )}
+      </button>
+    </div>
+  );
+};
 
-    )
-}
-
-export default Card
+export default Card;
