@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { post } from '../fetch/LGTM'
+import { useDispatch } from 'react-redux';
+import { getLgtms } from '../store/lgtmListSlice';
+import { AppDispatch } from '../store';
 
 export const IMAGE_ID = 'image';
 
@@ -45,6 +48,8 @@ export const useSendImage = (setUploaded: (uploaded: boolean) => void) => {
     required: 'ファイルを選択してください',
   });
 
+  const dispatch = useDispatch<AppDispatch>()
+
   const sendImage = async (data: FormValues) => {
     if (!isImageSelected.current) return;
     try {
@@ -52,6 +57,8 @@ export const useSendImage = (setUploaded: (uploaded: boolean) => void) => {
       setUploaded(true);
       const imageUrl = response.imageUrl;
 
+      // storeのリフレッシュ
+      dispatch(getLgtms())
       console.log('サーバーからのレスポンス:', imageUrl);
     } catch (error) {
       console.error('エラー:', error);
