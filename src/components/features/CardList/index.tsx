@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../Card";
-import { Pagination } from "@yamada-ui/react";
 import { Lgtm } from "../../../types/lgtm";
 
 interface Props {
