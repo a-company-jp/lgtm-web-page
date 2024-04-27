@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { FaRegCheckCircle, FaRegCopy } from "react-icons/fa";
-import { imageCopy } from "../../utils";
+import { imageCopy } from "../../../utils";
+import { Lgtm } from "../../../types/lgtm";
 
-export type CardProps = {
-  imageUrl: string;
-};
+interface Props {
+  lgtm: Lgtm;
+}
 
-const Card = ({ imageUrl }: CardProps) => {
+const Card = ({ lgtm }: Props) => {
   const [isCopying, setIsCopying] = useState(false);
 
   const handleCopyClick = async () => {
-    await imageCopy(imageUrl);
+    await imageCopy(lgtm.url);
     setIsCopying(true);
     setTimeout(() => {
       setIsCopying(false);
@@ -39,7 +40,7 @@ const Card = ({ imageUrl }: CardProps) => {
       >
         <img
           alt="LGTMの画像"
-          src={imageUrl}
+          src={lgtm.url}
           className="max-h-48 max-w-100 transition-opacity group-hover:opacity-30"
         />
         {isCopying ? (

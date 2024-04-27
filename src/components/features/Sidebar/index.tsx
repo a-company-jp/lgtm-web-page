@@ -1,17 +1,15 @@
 import React from "react";
-import Logo from "../atoms/Logo";
+import Logo from "../../atoms/Logo";
 import { Divider } from "@yamada-ui/react";
-import ButtonToGitHub from "../atoms/ButtonToGitHub";
-import CopyrightPolicyButton from "../atoms/CopyrightPolicyButton";
+import ButtonToGitHub from "../../atoms/ButtonToGitHub";
+import CopyrightPolicyButton from "../../atoms/CopyrightPolicyButton";
 import SendImageButton from "../SendImageButton";
 
 interface Props {
   className: string;
-  uploaded: boolean;
-  setUploaded: (uploaded: boolean) => void;
 }
 
-const Sidebar = ({ className, uploaded, setUploaded }: Props) => {
+const Sidebar = ({ className }: Props) => {
   const styles = {
     container: "flex flex-col h-full justify-between shadow-lg",
     top: "flex flex-col items-center text-center",
@@ -33,7 +31,7 @@ const Sidebar = ({ className, uploaded, setUploaded }: Props) => {
           <CopyrightPolicyButton />
         </div>
         <div className={styles.bottom}>
-          <SendImageButton setUploaded={setUploaded} />
+          <SendImageButton />
         </div>
       </div>
     </div>
