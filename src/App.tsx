@@ -10,7 +10,7 @@ import Sidebar from "./components/Sidebar";
 
 function App() {
   const [uploaded, setUploaded] = useState(false);
-  const [activePage, setActivePage] = useState(1);
+  const [activePage] = useState(1);
   const { LGTMUrls } = useLGTMFetch(activePage, uploaded, setUploaded);
 
   const styles = {
