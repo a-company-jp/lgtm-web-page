@@ -1,26 +1,35 @@
-import Header from "./components/Header";
 import "./App.css";
+import "./font/LINESeedJP_OTF_Rg.woff";
+import "./font/LINESeedJP_OTF_Bd.woff";
+import "./font/LINESeedJP_OTF_Th.woff";
 import CardList from "./components/CardList";
-import SendImageButton from "./components/SendImageButton";
 import { UIProvider } from "@yamada-ui/react";
-import { Pagination } from "./components/Pagination";
 import { useState } from "react";
 import useLGTMFetch from "./hooks/useLGTMFetch";
-import Banner from "./components/Banner";
+import Sidebar from "./components/Sidebar";
 
 function App() {
-  const [activePage, setActivePage] = useState(1);
   const [uploaded, setUploaded] = useState(false);
+  const [activePage, setActivePage] = useState(1);
   const { LGTMUrls } = useLGTMFetch(activePage, uploaded, setUploaded);
+
+  const styles = {
+    container: "grid grid-cols-7 h-screen w-screen",
+    content:
+      "col-span-5 flex text-center justify-center max-h-full overflow-auto",
+  };
 
   return (
     <UIProvider>
-      <div className="App">
-        <Banner />
-        <Header />
-        <SendImageButton setUploaded={setUploaded} />
-        <CardList {...LGTMUrls} />
-        <Pagination activePage={activePage} setActivePage={setActivePage} />
+      <div className={styles.container} style={{ fontFamily: "regular" }}>
+        <Sidebar
+          className="col-span-2"
+          uploaded={uploaded}
+          setUploaded={setUploaded}
+        />
+        <div className={styles.content}>
+          <CardList {...LGTMUrls} />
+        </div>
       </div>
     </UIProvider>
   );
