@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader, useDisclosure } from "@yamada-ui/react";
 import { useDropzone } from "react-dropzone";
-import getApiClient from "../../fetch/client";
-import { imageCopy } from "../../utils";
+import getApiClient from "../../../utils/client";
+import { imageCopy } from "../../../utils";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { getLgtms } from "../../store/lgtmListSlice";
+import { AppDispatch } from "../../../store";
+import { getLgtms } from "../../../store/lgtmListSlice";
 
 const SendImageButton = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();

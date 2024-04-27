@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaRegCheckCircle, FaRegCopy } from "react-icons/fa";
-import { imageCopy } from "../../utils";
-import { Lgtm } from "../../types/lgtm";
+import { imageCopy } from "../../../utils";
+import { Lgtm } from "../../../types/lgtm";
 
 interface Props {
   lgtm: Lgtm;

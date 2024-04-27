@@ -1,8 +1,8 @@
 import React from "react";
-import Logo from "../atoms/Logo";
+import Logo from "../../atoms/Logo";
 import { Divider } from "@yamada-ui/react";
-import ButtonToGitHub from "../atoms/ButtonToGitHub";
-import CopyrightPolicyButton from "../atoms/CopyrightPolicyButton";
+import ButtonToGitHub from "../../atoms/ButtonToGitHub";
+import CopyrightPolicyButton from "../../atoms/CopyrightPolicyButton";
 import SendImageButton from "../SendImageButton";
 
 interface Props {

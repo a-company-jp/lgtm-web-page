@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Lgtm } from "../types/lgtm";
-import getApiClient from "../fetch/client";
+import getApiClient from "../utils/client";
 
 export interface LgtmListState {
   lgtms: Lgtm[]
