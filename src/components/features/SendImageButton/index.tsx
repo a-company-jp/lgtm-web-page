@@ -57,7 +57,7 @@ const SendImageButton = (): JSX.Element => {
     <>
       <button
         onClick={onOpen}
-        className="py-2 px-8 text-[#FF8C8C] bg-white rounded-3xl shadow border border-red-400"
+        className="py-2 px-8 bg-[#FF8C8C] text-white rounded-3xl shadow border border-red-400"
       >
         <p className="text-3xl" style={{ fontFamily: "bold" }}>
           + New LGTM

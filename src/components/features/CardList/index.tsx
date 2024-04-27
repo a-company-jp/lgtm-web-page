@@ -20,7 +20,6 @@ function CardList({ lgtms }: Props) {
           <Card key={lgtm.id} lgtm={lgtm} />
         ))}
       </div>
-      <Pagination total={10} />
     </div>
   );
 }
