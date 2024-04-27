@@ -19,7 +19,6 @@ const Card = ({ imageUrl }: CardProps) => {
 
   // TODO: refactor css
   const styles = {
-    centering: "",
     card: "relative",
     linkWrapper: "group relative",
     image:
@@ -33,9 +32,16 @@ const Card = ({ imageUrl }: CardProps) => {
   };
 
   return (
-    <div className={`${styles.centering} ${styles.card}`}>
-      <button onClick={handleCopyClick} className={`${styles.linkWrapper}`}>
-        <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
+    <div className="h-64 w-64 flex flex-col rounded bg-white shadow-lg">
+      <button
+        onClick={handleCopyClick}
+        className="group relative flex h-40 flex-grow items-center justify-center p-2"
+      >
+        <img
+          alt="LGTMの画像"
+          src={imageUrl}
+          className="max-h-48 max-w-100 transition-opacity group-hover:opacity-30"
+        />
         {isCopying ? (
           <div className={styles.checkCircleWrapper}>
             <FaRegCheckCircle
@@ -50,6 +56,25 @@ const Card = ({ imageUrl }: CardProps) => {
         )}
       </button>
     </div>
+    // <div className="max-h-[300px] max-w-[450px]">
+    //   <div className={`${styles.card} max-h-[300px] max-w-[450px]`}>
+    //     <button onClick={handleCopyClick} className={`${styles.linkWrapper}`}>
+    //       <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
+    // {isCopying ? (
+    //   <div className={styles.checkCircleWrapper}>
+    //     <FaRegCheckCircle
+    //       className={styles.checkCircle}
+    //       color=""
+    //       size={35}
+    //     />
+    //     <span className={styles.copyMessage}>Copied!!</span>
+    //   </div>
+    // ) : (
+    //   <FaRegCopy className={styles.copyIcon} color="" size={35} />
+    // )}
+    //     </button>
+    //   </div>
+    // </div>
   );
 };
 
