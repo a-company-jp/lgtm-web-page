@@ -56,25 +56,6 @@ const Card = ({ imageUrl }: CardProps) => {
         )}
       </button>
     </div>
-    // <div className="max-h-[300px] max-w-[450px]">
-    //   <div className={`${styles.card} max-h-[300px] max-w-[450px]`}>
-    //     <button onClick={handleCopyClick} className={`${styles.linkWrapper}`}>
-    //       <img alt="LGTMの画像" src={imageUrl} className={`${styles.image}`} />
-    // {isCopying ? (
-    //   <div className={styles.checkCircleWrapper}>
-    //     <FaRegCheckCircle
-    //       className={styles.checkCircle}
-    //       color=""
-    //       size={35}
-    //     />
-    //     <span className={styles.copyMessage}>Copied!!</span>
-    //   </div>
-    // ) : (
-    //   <FaRegCopy className={styles.copyIcon} color="" size={35} />
-    // )}
-    //     </button>
-    //   </div>
-    // </div>
   );
 };
 
