@@ -1,5 +1,6 @@
 import React from "react";
 import Card, { CardProps } from "../Card";
+import { Pagination } from "@yamada-ui/react";
 
 type CardListProps = CardProps[];
 
@@ -7,17 +8,18 @@ function CardList(props: CardListProps) {
   const cardDataArray = Object.values(props);
 
   const styles = {
-    grid: "grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 md:grid-cols-2 md:gap-4 sm:grid-cols-2 sm:gap-4 mt-4 mx-6 lg:mx-36",
-    gridItem: "rounded-lg",
+    container: "flex flex-col",
+    grid: "grid grid-cols-3 gap-4",
   };
 
   return (
-    <div className={`${styles.grid}`}>
-      {cardDataArray.map((card) => (
-        <div className={`${styles.gridItem}`}>
+    <div className={styles.container}>
+      <div className={`${styles.grid} my-4`}>
+        {cardDataArray.map((card) => (
           <Card {...card} />
-        </div>
-      ))}
+        ))}
+      </div>
+      <Pagination total={10} />
     </div>
   );
 }

@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: LINESeedJPStd, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,4 +14,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: "regular";
+  src: url("./font/LINESeedJP_OTF_Rg.woff");
+}
+
+@font-face {
+  font-family: "bold";
+  src: url("./font/LINESeedJP_OTF_Bd.woff");
+}
+
+@font-face {
+  font-family: "thin";
+  src: url("./font/LINESeedJP_OTF_Th.woff");
 }
