@@ -4,14 +4,13 @@ import "./font/LINESeedJP_OTF_Bd.woff";
 import "./font/LINESeedJP_OTF_Th.woff";
 import CardList from "./components/CardList";
 import { Loading, UIProvider } from "@yamada-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getLgtms } from "./store/lgtmListSlice";
 import { AppDispatch, RootState } from "./store";
 
 function App() {
-  const [uploaded, setUploaded] = useState(false);
   const { lgtms, loading } = useSelector((state: RootState) => state.lgtms);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
@@ -27,11 +26,7 @@ function App() {
   return (
     <UIProvider>
       <div className={styles.container} style={{ fontFamily: "regular" }}>
-        <Sidebar
-          className="col-span-2"
-          uploaded={uploaded}
-          setUploaded={setUploaded}
-        />
+        <Sidebar className="col-span-2" />
         <div className={styles.content}>
           {loading ? (
             <div className="h-full flex justify-center items-center">
