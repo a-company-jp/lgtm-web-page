@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../atoms/Logo";
 import { Divider } from "@yamada-ui/react";
 import ButtonToGitHub from "../atoms/ButtonToGitHub";
 import CopyrightPolicyButton from "../atoms/CopyrightPolicyButton";
 import SendImageButton from "../SendImageButton";
-import useLGTMFetch from "../../hooks/useLGTMFetch";
 
 interface Props {
   className: string;
