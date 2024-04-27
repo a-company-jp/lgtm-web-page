@@ -1,12 +1,13 @@
 import React from "react";
-import Card, { CardProps } from "../Card";
+import Card from "../Card";
 import { Pagination } from "@yamada-ui/react";
+import { Lgtm } from "../../types/lgtm";
 
-type CardListProps = CardProps[];
+interface Props {
+  lgtms: Lgtm[];
+}
 
-function CardList(props: CardListProps) {
-  const cardDataArray = Object.values(props);
-
+function CardList({ lgtms }: Props) {
   const styles = {
     container: "flex flex-col",
     grid: "grid grid-cols-3 gap-4",
@@ -15,8 +16,8 @@ function CardList(props: CardListProps) {
   return (
     <div className={styles.container}>
       <div className={`${styles.grid} my-4`}>
-        {cardDataArray.map((card) => (
-          <Card {...card} />
+        {lgtms.map((lgtm) => (
+          <Card key={lgtm.id} lgtm={lgtm} />
         ))}
       </div>
       <Pagination total={10} />

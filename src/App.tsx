@@ -3,15 +3,20 @@ import "./font/LINESeedJP_OTF_Rg.woff";
 import "./font/LINESeedJP_OTF_Bd.woff";
 import "./font/LINESeedJP_OTF_Th.woff";
 import CardList from "./components/CardList";
-import { UIProvider } from "@yamada-ui/react";
-import { useState } from "react";
-import useLGTMFetch from "./hooks/useLGTMFetch";
+import { Loading, UIProvider } from "@yamada-ui/react";
+import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { getLgtms } from "./store/lgtmListSlice";
+import { AppDispatch, RootState } from "./store";
 
 function App() {
   const [uploaded, setUploaded] = useState(false);
-  const [activePage, setActivePage] = useState(1);
-  const { LGTMUrls } = useLGTMFetch(activePage, uploaded, setUploaded);
+  const { lgtms, loading } = useSelector((state: RootState) => state.lgtms);
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(getLgtms());
+  }, [dispatch]);
 
   const styles = {
     container: "grid grid-cols-7 h-screen w-screen",
@@ -28,7 +33,13 @@ function App() {
           setUploaded={setUploaded}
         />
         <div className={styles.content}>
-          <CardList {...LGTMUrls} />
+          {loading ? (
+            <div className="h-full flex justify-center items-center">
+              <Loading size="3xl" />
+            </div>
+          ) : (
+            <CardList lgtms={lgtms} />
+          )}
         </div>
       </div>
     </UIProvider>
